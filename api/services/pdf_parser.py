@@ -1,4 +1,21 @@
 import fitz  # PyMuPDF
+import httpx
+import re
+
+async def fetch_arxiv_pdf(url: str) -> bytes:
+    """
+    Given an arXiv URL (abs or pdf), fetches the raw PDF bytes.
+    """
+    # Convert abs to pdf URL if needed
+    if "/abs/" in url:
+        url = url.replace("/abs/", "/pdf/")
+    if not url.endswith(".pdf"):
+        url += ".pdf"
+        
+    async with httpx.AsyncClient(timeout=30.0) as client:
+        response = await client.get(url)
+        response.raise_for_status()
+        return response.content
 
 def extract_text_from_pdf(pdf_bytes: bytes) -> str:
     """

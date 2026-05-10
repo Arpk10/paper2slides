@@ -14,7 +14,7 @@ class Slide(BaseModel):
 class PresentationModel(BaseModel):
     slides: list[Slide] = Field(description="Exactly 8 slides as specified")
 
-def generate_slides_from_text(paper_text: str) -> dict:
+def generate_slides_from_text(paper_text: str, template_mode: str = "Standard") -> dict:
     """
     Sends the extracted PDF text to Claude Sonnet to generate 8 specific slides.
     Returns a dictionary matching the PresentationModel schema.
@@ -34,9 +34,22 @@ def generate_slides_from_text(paper_text: str) -> dict:
             ]
         }
 
-    system_prompt = """
+    mode_instructions = ""
+    if template_mode == "Physics Seminar":
+        mode_instructions = "Focus on rigorous derivations, core physical intuition, and observable consequences. Use formal academic tone."
+    elif template_mode == "ML Conference":
+        mode_instructions = "Emphasize architecture novelties, dataset scales, benchmark results, and compute efficiency. Use fast-paced tech tone."
+    elif template_mode == "Journal Club":
+        mode_instructions = "Critically analyze the paper. Include potential weaknesses, alternative interpretations, and broader impact. Conversational tone."
+    elif template_mode == "Thesis Defense":
+        mode_instructions = "Frame the work as a cohesive narrative of personal contribution, deeply explaining the 'why' and emphasizing mastery of the subject."
+
+    system_prompt = f"""
     You are an expert academic presentation designer. Your task is to take the provided text from a research paper 
     and convert it into a highly concise, 8-slide presentation.
+    
+    TEMPLATE MODE: {template_mode}
+    {mode_instructions}
     
     You MUST output EXACTLY 8 slides in this order:
     1. Title
@@ -44,14 +57,14 @@ def generate_slides_from_text(paper_text: str) -> dict:
     3. Background
     4. Method
     5. Results
-    6. Key Equation
+    6. Key Equation / Core Insight
     7. Conclusion
-    8. Questions
+    8. Audience Questions
     
     For each slide, provide:
     - title: the title of the slide.
-    - bullets: 3 to 5 very concise, punchy bullet points. No long paragraphs.
-    - speaker_notes: A brief paragraph of what the presenter should actually say.
+    - bullets: 3 to 5 very concise, punchy bullet points. No long paragraphs. Focus on the 'Key Intuition'.
+    - speaker_notes: A brief paragraph of what the presenter should actually say to explain the intuition clearly to the audience.
     
     Return the response as a JSON object containing a "slides" array. No markdown wrapping, just valid JSON.
     """
