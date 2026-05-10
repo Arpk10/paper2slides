@@ -69,8 +69,8 @@ npm run dev
 ```
 
 ## 🌐 Production Deployment (1-Click)
-- **Frontend:** Import the repository into **Vercel**. Set root directory to `web`.
-- **Backend:** Import the repository into **Render** as a Web Service. Render will auto-detect the `render.yaml` file and deploy the FastAPI server.
+- **Frontend:** Import the repository into **Vercel**. Set the Framework to `Next.js` and the Root Directory to `web`.
+- **Backend:** Import the repository into **Railway**. Create a new project -> Deploy from GitHub repo. In the service settings, set the **Root Directory** to `api` and the **Start Command** to `uvicorn main:app --host 0.0.0.0 --port $PORT`.
 
 ---
 
