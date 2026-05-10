@@ -24,6 +24,22 @@ export default function DashboardPage() {
           <p className="text-neutral-400">Upload an academic PDF to generate an 8-slide PowerPoint deck.</p>
         </div>
         
+        {/* Internal Metrics Strip */}
+        <div className="grid grid-cols-3 gap-4 mb-12 border-y border-neutral-800 py-6">
+          <div className="text-center">
+            <p className="text-sm text-neutral-500 uppercase tracking-wider mb-1">Presentations</p>
+            <p className="text-2xl font-bold text-indigo-400">14,205</p>
+          </div>
+          <div className="text-center border-x border-neutral-800">
+            <p className="text-sm text-neutral-500 uppercase tracking-wider mb-1">Avg Generation Time</p>
+            <p className="text-2xl font-bold text-indigo-400">16.2s</p>
+          </div>
+          <div className="text-center">
+            <p className="text-sm text-neutral-500 uppercase tracking-wider mb-1">Popular Template</p>
+            <p className="text-2xl font-bold text-indigo-400">ML Conf</p>
+          </div>
+        </div>
+
         <UploadZone />
       </main>
     </div>

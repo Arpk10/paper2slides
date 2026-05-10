@@ -14,8 +14,22 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Paper2Slides",
-  description: "Convert academic research papers to slides instantly.",
+  title: "Paper2Slides | Convert arXiv Papers to Presentations Instantly",
+  description: "Stop spending hours formatting academic slides. Turn any arXiv PDF into an 8-slide, seminar-ready PowerPoint presentation in seconds.",
+  keywords: ["arxiv to slides", "ai presentation generator", "research paper to pptx", "academic slides ai"],
+  openGraph: {
+    title: "Paper2Slides | Convert arXiv Papers to Presentations",
+    description: "Turn any research paper into a seminar-ready presentation instantly.",
+    type: "website",
+    url: "https://paper2slides.com",
+    images: ["/screenshots/og-image.jpg"]
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Paper2Slides | Convert arXiv Papers to Presentations",
+    description: "Turn any research paper into a seminar-ready presentation instantly.",
+    images: ["/screenshots/og-image.jpg"]
+  }
 };
 
 export default function RootLayout({
@@ -29,6 +43,9 @@ export default function RootLayout({
         lang="en"
         className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
       >
+        <head>
+          <script defer data-domain="paper2slides.com" src="https://plausible.io/js/script.js"></script>
+        </head>
         <body className="min-h-full flex flex-col">{children}</body>
       </html>
     </ClerkProvider>

@@ -2,7 +2,7 @@
 
 import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import Link from "next/link";
-import { ArrowRight, FileText, Presentation, Zap, Upload, CheckCircle2, ChevronRight, MessageSquareQuote } from "lucide-react";
+import { ArrowRight, FileText, Presentation, Zap, Upload, CheckCircle2, ChevronRight, MessageSquareQuote, PlayCircle, XCircle, Clock, GraduationCap } from "lucide-react";
 import { useState, useEffect } from "react";
 
 export default function LandingPage() {
@@ -24,9 +24,16 @@ export default function LandingPage() {
   };
 
   return (
-    <div className="min-h-screen bg-neutral-950 text-neutral-50 selection:bg-indigo-500/30 overflow-hidden">
+    <div className="min-h-screen bg-neutral-950 text-neutral-50 selection:bg-indigo-500/30 overflow-hidden relative">
+      
+      {/* Product Hunt Launching Soon Banner */}
+      <div className="bg-indigo-600 text-white text-sm font-medium py-2 px-4 text-center sticky top-0 z-[60]">
+        <span className="opacity-90">🚀 Launching soon on Product Hunt!</span>
+        <a href="#" className="ml-2 underline hover:text-indigo-200 transition-colors">Get notified</a>
+      </div>
+
       {/* Navigation */}
-      <nav className="border-b border-neutral-800 bg-neutral-950/80 backdrop-blur-md fixed top-0 w-full z-50">
+      <nav className="border-b border-neutral-800 bg-neutral-950/80 backdrop-blur-md sticky top-10 z-50">
         <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
           <div className="flex items-center gap-2 font-bold text-xl tracking-tight">
             <Presentation className="h-6 w-6 text-indigo-500" />
@@ -56,7 +63,7 @@ export default function LandingPage() {
       </nav>
 
       {/* Hero Section */}
-      <main className="max-w-6xl mx-auto px-4 pt-32 pb-16">
+      <main className="max-w-6xl mx-auto px-4 pt-24 pb-16">
         <div className="text-center max-w-4xl mx-auto space-y-8">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-indigo-500/10 text-indigo-400 text-sm font-medium border border-indigo-500/20 animate-fade-in-up">
             <span className="relative flex h-2 w-2">
@@ -67,11 +74,11 @@ export default function LandingPage() {
           </div>
           
           <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-br from-white via-white to-neutral-500 animate-fade-in-up animation-delay-100">
-            Turn arXiv papers into seminar-ready presentations instantly.
+            Stop spending hours making seminar slides.
           </h1>
           
           <p className="text-lg md:text-xl text-neutral-400 max-w-2xl mx-auto leading-relaxed animate-fade-in-up animation-delay-200">
-            Don't waste hours formatting slides. Paste an arXiv URL or upload a PDF. We extract the core intuition, methods, and equations into an 8-slide PowerPoint tailored for Journal Clubs, Thesis Defenses, and Physics/ML Seminars.
+            Paste an arXiv URL or upload a PDF. We instantly extract the core intuition, methodology, and key equations into an 8-slide PowerPoint tailored for Journal Clubs, Lab Meetings, and Thesis Defenses.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4 animate-fade-in-up animation-delay-300">
@@ -92,60 +99,88 @@ export default function LandingPage() {
               </SignInButton>
             </SignedOut>
           </div>
-          
-          <div className="flex items-center justify-center gap-4 pt-6 opacity-60 grayscale hover:grayscale-0 transition-all cursor-pointer animate-fade-in-up animation-delay-400">
-            <div className="flex items-center gap-2 border border-neutral-700 bg-neutral-900 rounded-lg px-4 py-2">
-               <div className="w-4 h-4 bg-[#DA552F] rounded-full"></div>
-               <span className="font-semibold text-sm">PRODUCT HUNT</span>
-               <span className="text-sm font-bold ml-2">#1 Product of the Day</span>
+        </div>
+
+        {/* Credibility Strip */}
+        <div className="mt-20 text-center animate-fade-in-up animation-delay-400">
+          <p className="text-sm font-medium text-neutral-500 uppercase tracking-widest mb-6">Trusted by Researchers in Physics, ML & Academia</p>
+          <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-50 grayscale">
+            {/* Generic Academic Badges using Lucide icons + Text */}
+            <div className="flex items-center gap-2 text-xl font-bold font-serif"><GraduationCap className="h-8 w-8"/> UNIVERSITY LABS</div>
+            <div className="flex items-center gap-2 text-xl font-bold"><Atom className="h-8 w-8"/> PHYSICS DEPTS</div>
+            <div className="flex items-center gap-2 text-xl font-bold font-mono"><Cpu className="h-8 w-8"/> ML CONFERENCES</div>
+          </div>
+        </div>
+
+        {/* Video Placeholder */}
+        <div className="mt-32 max-w-4xl mx-auto rounded-3xl overflow-hidden border border-neutral-800 bg-neutral-900 shadow-2xl relative aspect-video animate-fade-in-up animation-delay-500 group cursor-pointer">
+          <div className="absolute inset-0 bg-neutral-950 flex flex-col items-center justify-center">
+            {/* When replacing with real video, use an iframe for YouTube embed here */}
+            <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&q=80&w=2000')] bg-cover bg-center opacity-20"></div>
+            <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 to-transparent"></div>
+            <PlayCircle className="w-20 h-20 text-white opacity-80 group-hover:scale-110 group-hover:opacity-100 transition-all z-10" />
+            <p className="mt-4 text-neutral-300 font-medium z-10">Watch the 30-second demo</p>
+          </div>
+        </div>
+
+        {/* Comparison Section */}
+        <div className="mt-40">
+          <h2 className="text-3xl font-bold text-center mb-16">The old way vs. Paper2Slides</h2>
+          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+            {/* Old Way */}
+            <div className="p-8 rounded-3xl bg-red-950/20 border border-red-900/30">
+              <div className="flex items-center gap-3 mb-6 text-red-400">
+                <XCircle className="w-6 h-6" />
+                <h3 className="text-xl font-semibold">Manual Workflow</h3>
+              </div>
+              <ul className="space-y-4 text-neutral-400">
+                <li className="flex items-start gap-3"><Clock className="w-5 h-5 shrink-0 mt-0.5 opacity-50" /> Read a dense 20-page PDF</li>
+                <li className="flex items-start gap-3"><Clock className="w-5 h-5 shrink-0 mt-0.5 opacity-50" /> Highlight key equations and methods</li>
+                <li className="flex items-start gap-3"><Clock className="w-5 h-5 shrink-0 mt-0.5 opacity-50" /> Open PowerPoint and create blank slides</li>
+                <li className="flex items-start gap-3"><Clock className="w-5 h-5 shrink-0 mt-0.5 opacity-50" /> Copy-paste text, inevitably breaking formatting</li>
+                <li className="flex items-start gap-3"><Clock className="w-5 h-5 shrink-0 mt-0.5 opacity-50" /> Manually write speaker notes</li>
+              </ul>
+              <div className="mt-8 pt-6 border-t border-red-900/30 text-red-300 font-medium">
+                Time spent: 2-3 hours
+              </div>
+            </div>
+
+            {/* New Way */}
+            <div className="p-8 rounded-3xl bg-indigo-950/20 border border-indigo-500/30 relative overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 to-transparent"></div>
+              <div className="relative">
+                <div className="flex items-center gap-3 mb-6 text-indigo-400">
+                  <CheckCircle2 className="w-6 h-6" />
+                  <h3 className="text-xl font-semibold">Paper2Slides Workflow</h3>
+                </div>
+                <ul className="space-y-4 text-neutral-300">
+                  <li className="flex items-start gap-3"><Zap className="w-5 h-5 text-indigo-500 shrink-0 mt-0.5" /> Paste an arXiv URL</li>
+                  <li className="flex items-start gap-3"><Zap className="w-5 h-5 text-indigo-500 shrink-0 mt-0.5" /> Select "Journal Club" mode</li>
+                  <li className="flex items-start gap-3"><Zap className="w-5 h-5 text-indigo-500 shrink-0 mt-0.5" /> Instantly download a formatted .pptx</li>
+                </ul>
+                <div className="mt-8 pt-6 border-t border-indigo-500/30 text-indigo-300 font-medium text-xl">
+                  Time spent: 15 seconds
+                </div>
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Animated Workflow Visual */}
-        <div className="mt-24 relative max-w-5xl mx-auto animate-fade-in-up animation-delay-500">
-          <div className="absolute inset-0 bg-gradient-to-b from-indigo-500/10 to-transparent blur-3xl -z-10 rounded-full"></div>
-          <div className="grid md:grid-cols-3 gap-4 md:gap-8 items-center bg-neutral-900/50 border border-neutral-800 p-8 rounded-3xl backdrop-blur-sm">
-            
-            {/* Step 1 */}
-            <div className="flex flex-col items-center text-center space-y-4">
-              <div className="w-16 h-16 rounded-2xl bg-neutral-800 border border-neutral-700 flex items-center justify-center shadow-lg">
-                <FileText className="h-8 w-8 text-neutral-400" />
+        {/* Use Cases Section */}
+        <div className="mt-40 text-center">
+          <h2 className="text-3xl font-bold mb-4">Built for every academic occasion</h2>
+          <p className="text-neutral-400 max-w-2xl mx-auto mb-12">Our prompt templates are specifically tuned to extract the right level of detail based on your audience.</p>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
+            {['Journal Club', 'Thesis Defense', 'Lab Meeting', 'Conference Presentation'].map((useCase) => (
+              <div key={useCase} className="p-4 rounded-xl bg-neutral-900 border border-neutral-800 text-neutral-300 font-medium">
+                {useCase}
               </div>
-              <div>
-                <h4 className="font-semibold text-neutral-200">1. Input</h4>
-                <p className="text-sm text-neutral-500">arXiv URL or PDF</p>
-              </div>
-            </div>
-
-            {/* Step 2 */}
-            <div className="flex flex-col items-center text-center space-y-4 relative">
-              <div className="hidden md:block absolute top-8 -left-12 -right-12 h-0.5 bg-gradient-to-r from-transparent via-indigo-500/50 to-transparent"></div>
-              <div className="w-16 h-16 rounded-2xl bg-indigo-600 border border-indigo-500 flex items-center justify-center shadow-[0_0_30px_rgba(99,102,241,0.5)] z-10 relative">
-                <Zap className="h-8 w-8 text-white animate-pulse" />
-              </div>
-              <div>
-                <h4 className="font-semibold text-neutral-200">2. Processing</h4>
-                <p className="text-sm text-neutral-500">Claude 3.5 Sonnet Extraction</p>
-              </div>
-            </div>
-
-            {/* Step 3 */}
-            <div className="flex flex-col items-center text-center space-y-4">
-              <div className="w-16 h-16 rounded-2xl bg-neutral-800 border border-neutral-700 flex items-center justify-center shadow-lg">
-                <Presentation className="h-8 w-8 text-pink-400" />
-              </div>
-              <div>
-                <h4 className="font-semibold text-neutral-200">3. Output</h4>
-                <p className="text-sm text-neutral-500">8-Slide PPTX File</p>
-              </div>
-            </div>
-
+            ))}
           </div>
         </div>
 
         {/* Features Grid */}
-        <div className="mt-32 grid md:grid-cols-3 gap-8">
+        <div className="mt-40 grid md:grid-cols-3 gap-8">
           {[
             {
               title: "Built for Seminars",
@@ -174,8 +209,8 @@ export default function LandingPage() {
         </div>
 
         {/* Testimonials */}
-        <div className="mt-32">
-          <h2 className="text-3xl font-bold text-center mb-12">Trusted by researchers worldwide</h2>
+        <div className="mt-40">
+          <h2 className="text-3xl font-bold text-center mb-12">Used by researchers worldwide</h2>
           <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
             <div className="p-6 rounded-2xl bg-neutral-900 border border-neutral-800">
               <div className="flex text-yellow-400 mb-4">★★★★★</div>
@@ -202,39 +237,47 @@ export default function LandingPage() {
           </div>
         </div>
 
-        {/* Waitlist / CTA */}
-        <div className="mt-32 max-w-2xl mx-auto text-center border border-neutral-800 bg-neutral-900/50 rounded-3xl p-12 backdrop-blur-sm">
-          <h2 className="text-3xl font-bold mb-4">Join the Pro Waitlist</h2>
-          <p className="text-neutral-400 mb-8">We are rolling out bulk batching and custom corporate themes. Enter your email to get early access.</p>
+        {/* Waitlist / Bottom CTA */}
+        <div className="mt-40 max-w-2xl mx-auto text-center border border-neutral-800 bg-neutral-900/50 rounded-3xl p-12 backdrop-blur-sm">
+          <h2 className="text-3xl font-bold mb-4">Ready to reclaim your time?</h2>
+          <p className="text-neutral-400 mb-8">Generate your first academic presentation instantly. No credit card required.</p>
           
-          {waitlistSuccess ? (
-            <div className="bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 px-6 py-4 rounded-full font-medium flex items-center justify-center gap-2">
-              <CheckCircle2 className="w-5 h-5" />
-              You're on the list! We'll be in touch.
-            </div>
-          ) : (
-            <form onSubmit={handleWaitlist} className="flex flex-col sm:flex-row gap-3">
-              <input 
-                type="email" 
-                required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="researcher@university.edu" 
-                className="flex-1 bg-neutral-950 border border-neutral-700 rounded-full px-6 py-3 text-neutral-200 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all"
-              />
-              <button type="submit" className="bg-white text-black font-semibold rounded-full px-8 py-3 hover:bg-neutral-200 transition-colors flex items-center justify-center gap-2">
-                Join Waitlist <ChevronRight className="w-4 h-4" />
-              </button>
-            </form>
-          )}
+          <div className="flex justify-center">
+            <SignedOut>
+              <SignInButton mode="modal">
+                <button className="flex items-center gap-2 bg-white text-black font-semibold rounded-full px-8 py-4 text-lg hover:bg-neutral-200 transition-colors shadow-xl">
+                  Try Paper2Slides Free <ArrowRight className="w-5 h-5" />
+                </button>
+              </SignInButton>
+            </SignedOut>
+            <SignedIn>
+              <Link href="/dashboard" className="flex items-center gap-2 bg-white text-black font-semibold rounded-full px-8 py-4 text-lg hover:bg-neutral-200 transition-colors shadow-xl">
+                Go to Dashboard <ArrowRight className="w-5 h-5" />
+              </Link>
+            </SignedIn>
+          </div>
         </div>
       </main>
 
-      <footer className="border-t border-neutral-800 mt-20">
-        <div className="max-w-6xl mx-auto px-4 py-8 text-center text-neutral-500 text-sm">
-          © {new Date().getFullYear()} Paper2Slides. Built for micro-acquisition.
+      <footer className="border-t border-neutral-800 mt-20 bg-neutral-950">
+        <div className="max-w-6xl mx-auto px-4 py-12 flex flex-col md:flex-row justify-between items-center gap-4 text-neutral-500 text-sm">
+          <div className="flex items-center gap-2 font-bold text-neutral-300">
+            <Presentation className="h-5 w-5" /> Paper2Slides
+          </div>
+          <div className="flex gap-6">
+            <Link href="/convert-arxiv-paper-to-slides" className="hover:text-neutral-300">Convert arXiv to Slides</Link>
+            <Link href="/ai-seminar-presentation-generator" className="hover:text-neutral-300">Seminar Generator</Link>
+            <Link href="/journal-club-presentation-tool" className="hover:text-neutral-300">Journal Club AI</Link>
+          </div>
+          <div>
+            © {new Date().getFullYear()} Paper2Slides. Built for researchers.
+          </div>
         </div>
       </footer>
     </div>
   );
 }
+
+// Ensure icons used above are imported if needed (Atom, Cpu, GraduationCap were added)
+function Atom(props: any) { return <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="1"/><path d="M20.2 20.2c2.04-2.03.02-7.36-4.5-11.9-4.54-4.52-9.87-6.54-11.9-4.5-2.04 2.03-.02 7.36 4.5 11.9 4.54 4.52 9.87 6.54 11.9 4.5Z"/><path d="M15.7 15.7c4.52-4.54 6.54-9.87 4.5-11.9-2.03-2.04-7.36-.02-11.9 4.5-4.52 4.54-6.54 9.87-4.5 11.9 2.03 2.04 7.36.02 11.9-4.5Z"/></svg> }
+function Cpu(props: any) { return <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></svg> }
